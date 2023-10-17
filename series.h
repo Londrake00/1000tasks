@@ -1,6 +1,6 @@
 #pragma once
 
-int* createIntArray(int size)
+int* CreateIntArray(int size)
 {
     int* arr = new int[size];
     srand(time(NULL));
@@ -9,11 +9,11 @@ int* createIntArray(int size)
         arr[i] = rand() % 10 + 1;
         std::cout << arr[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << " - Random Array" << std::endl;
     return arr;
 }
 
-double* createDoubleArray(int size)
+double* CreateDoubleArray(int size)
 {
     double* arr = new double[size];
     srand(time(NULL));
@@ -24,13 +24,30 @@ double* createDoubleArray(int size)
         arr[i] = static_cast<double>(rand() % 10 + 1) + decimalPart;
         std::cout << arr[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << " - Random Array" << std::endl;
     return arr;
+}
+
+void PrintArray(int* arr, int size)
+{
+    for (int i = 0; i < size; i++)
+        std::cout << arr[i] << " ";
+}
+
+void BubbleSort(int *arr, int size)
+{
+    for (int i = 0; i < size - 1; i++) 
+        for (int j = 0; j < size - i - 1; j++)
+            if (arr[j] > arr[j + 1])
+                std::swap(arr[j], arr[j + 1]);
+    PrintArray(arr, size);
+    std::cout << " - Sorted Array";
+    std::cout << std::endl;
 }
 
 void series1(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int sum = 0;
     for (int i = 0; i < size;i++)
     {
@@ -42,7 +59,7 @@ void series1(int size)
 
 void series2(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int sum = 0;
     for (int i = 0; i < size;i++)
     {
@@ -54,7 +71,7 @@ void series2(int size)
 
 void series3(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int sum = 0;
     for (int i = 0; i < size;i++)
     {
@@ -66,7 +83,7 @@ void series3(int size)
 
 void series4(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int sum = 0, product = 1;
     for (int i = 0; i < size;i++)
     {
@@ -79,7 +96,7 @@ void series4(int size)
 
 void series5(int size)
 {
-    double* arr = createDoubleArray(size);
+    double* arr = CreateDoubleArray(size);
     double sum = 0;
     for (int i = 0; i < size;i++)
     {
@@ -94,7 +111,7 @@ void series5(int size)
 
 void series6(int size)
 {
-    double* arr = createDoubleArray(size);
+    double* arr = CreateDoubleArray(size);
     double product = 1;
     for (int i = 0; i < size;i++)
     {
@@ -110,7 +127,7 @@ void series6(int size)
 
 void series7(int size)
 {
-    double* arr = createDoubleArray(size);
+    double* arr = CreateDoubleArray(size);
     for (int i = 0; i < size;i++)
     {
         std::cout << round(arr[i]) << " ";
@@ -120,7 +137,7 @@ void series7(int size)
 
 void series8(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int k = 0;
     for (int i = 0; i < size;i++)
     {
@@ -136,7 +153,7 @@ void series8(int size)
 
 void series9(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int k = 0;
     for (int i = 0; i < size;i++)
     {
@@ -152,7 +169,7 @@ void series9(int size)
 
 bool series10(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int k = 0;
     for (int i = 0; i < size;i++)
     {
@@ -168,7 +185,7 @@ bool series10(int size)
 
 bool series11(int size, int k)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     for (int i = 0; i < size;i++)
     {
         if (arr[i] < k)
@@ -183,7 +200,7 @@ bool series11(int size, int k)
 
 void series12(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int k = 0;
     for (int i = 0; i < size;i++)
     {
@@ -197,7 +214,7 @@ void series12(int size)
 
 void series13(int size)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int sum = 0;
     for (int i = 0; i < size;i++)
     {
@@ -212,7 +229,7 @@ void series13(int size)
 
 void series14(int size, int k)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     int count = 0;
     for (int i = 0; i < size;i++)
     {
@@ -227,7 +244,7 @@ void series14(int size, int k)
 
 void series15(int size, int k)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     bool count = true;
     for (int i = 0; i < size;i++)
     {
@@ -247,7 +264,7 @@ void series15(int size, int k)
 
 void series16(int size, int k)
 {
-    int* arr = createIntArray(size);
+    int* arr = CreateIntArray(size);
     bool count = true;
     int index = 0;
     for (int i = 0; i < size;i++)
@@ -264,4 +281,57 @@ void series16(int size, int k)
     }
     std::cout << index;
     delete[] arr;
+}
+
+void PrintSortedArrayWithNumber(int size, int b) //series 17
+{
+    int* arr = CreateIntArray(size);
+    BubbleSort(arr, size);
+    int index = size + 1;
+    for (int i = 0; i < size; i++)
+        if (*(arr+i) > b)
+        {
+            index = i;
+            break;
+        }
+    for (int i = 0; i < index; i++)
+    {
+        std::cout << *(arr+i) << " ";
+    }
+    std::cout << b << " ";
+    for (int i = index; i < size; i++)
+    {
+        std::cout << *(arr+i) << " ";
+    }
+}
+
+void PrintArrayWithUniqueNumber(int size) //series 18
+{
+    int* arr = CreateIntArray(size);
+    BubbleSort(arr, size);
+    int uniqueNumber = *(arr);
+    std::cout << *(arr) << " ";
+    for (int i = 1; i < size; i++)
+    {
+        if (*(arr + i) == uniqueNumber)
+            continue;
+        std::cout << *(arr + i) << " ";
+        uniqueNumber = *(arr + i);
+    }
+}
+
+void PrintArrayWithNumbersLowerThanLeft(int size) //series 19
+{
+    int* arr = CreateIntArray(size);
+    int count = 1;
+    std::cout << *(arr) << " ";
+    for (int i = 1; i < size; i++)
+    {
+        if (*(arr + i) < *(arr + i - 1))
+        {
+            std::cout << *(arr + i) << " ";
+            count++;
+        }
+    }
+    std::cout << std::endl << count;
 }

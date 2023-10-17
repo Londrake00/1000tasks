@@ -396,3 +396,4 @@ void for40(int a, int b)
 		}
 		std::cout << std::endl;
 	}
+}
