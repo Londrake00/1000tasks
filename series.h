@@ -1,4 +1,6 @@
 #pragma once
+#include <numeric>
+
 
 int* CreateIntArray(int size)
 {
@@ -323,9 +325,9 @@ void PrintArrayWithUniqueNumber(int size) //series 18
 void PrintArrayWithNumbersLowerThanLeft(int size) //series 19
 {
     int* arr = CreateIntArray(size);
-    int count = 1;
+    int count = 0;
     std::cout << *(arr) << " ";
-    for (int i = 1; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         if (*(arr + i) < *(arr + i - 1))
         {
@@ -334,4 +336,109 @@ void PrintArrayWithNumbersLowerThanLeft(int size) //series 19
         }
     }
     std::cout << std::endl << count;
+}
+
+void PrintArrayWithNumbersLowerThanRight(int size) //series 20
+{
+    int* arr = CreateIntArray(size);
+    int count = 0;
+    std::cout << *(arr) << " ";
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (*(arr + i) > *(arr + i + 1))
+        {
+            std::cout << *(arr + i) << " ";
+            count++;
+        }
+    }
+    std::cout << std::endl << count;
+}
+
+bool isArraySortedInAscendingOrder(int size) //series 21
+{
+    int* arr = CreateIntArray(size);
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (*(arr + i) > *(arr + i + 1))
+            return false;
+        return true;
+    }
+}
+
+void isArraySortedInDescendingOreder(int size) //series 22
+{
+    int* arr = CreateIntArray(size);
+    int index = 0;
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (*(arr + i) < *(arr + i + 1))
+        {
+            index = i + 1;
+            break;
+        }
+    }
+    std::cout << index;
+}
+
+void isArraySawtoothed(int size) //series 23
+{
+    int* arr = CreateIntArray(size);
+    int index = 0;
+    for (int i = 1; i < size - 1; i++)  
+    {
+        if ((*(arr + i) > *(arr + i + 1) && *(arr + i) > *(arr + i - 1)) || (*(arr + i) < *(arr + i + 1) && *(arr + i) < *(arr + i - 1)))
+        {
+            continue;
+        }
+        else
+        {
+            index = i + 1;
+            break;
+        }
+        std::cout << index;
+    }
+}
+
+void PrintSumBetweenLastZeros(int size) //series 24
+{
+    int* arr = CreateIntArray(size);
+    int sum = 0;
+    int lastZeroIndex = -1;
+    int lastZeroIndex2 = -1;
+    for (int i = 0; i < size; i++) 
+    {
+        if (arr[i] == 0) 
+        {
+            if (lastZeroIndex != -1 && i == size - 1) 
+            {
+                sum += std::accumulate(arr + lastZeroIndex + 1, arr + i, 0);
+            }
+            lastZeroIndex2 = lastZeroIndex;
+            lastZeroIndex = i;
+        }
+    }
+    std::cout << sum;
+}
+
+void PrintNumberBetweenFirstZeros(int size) //series 25
+{
+    int* arr = CreateIntArray(size);
+    int sum = 0;
+    int firstZeroIndex = -1;
+    for (int i = 0; i < size; i++) 
+    {
+        if (arr[i] == 0) 
+        {
+            if (firstZeroIndex == -1) 
+            {
+                firstZeroIndex = i;
+            }
+            else 
+            {
+                sum += std::accumulate(arr + firstZeroIndex + 1, arr + i, 0);
+                break;
+            }
+        }
+    }
+    std::cout << sum;
 }

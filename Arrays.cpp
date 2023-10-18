@@ -4,8 +4,9 @@
 #include "series.h"
 #include <ctime>
 #include <cmath>
+#include <numeric>
 
 int main()
 {
-	PrintArrayWithNumbersLowerThanLeft(10);
+	PrintNumberBetweenFirstZeros(10);
 }
