@@ -1,8 +1,9 @@
 #pragma once
 
-void for1(int k, int n)
+template<class T>
+void PrintNumberSomeTimes(T n, T k) // for 1
 {
-	for (int i = 0; i < k; i++)
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << k << std::endl;
 	}
