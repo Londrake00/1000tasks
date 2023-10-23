@@ -5,8 +5,9 @@
 #include <ctime>
 #include <cmath>
 #include <numeric>
+#include "windows.h"
 
 int main()
 {
-	PrintNumberBetweenFirstZeros(10);
+	std::cout << for12;
 }

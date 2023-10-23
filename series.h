@@ -1,5 +1,6 @@
 #pragma once
 #include <numeric>
+#include "windows.h"
 
 
 int* CreateIntArray(int size)
@@ -8,7 +9,7 @@ int* CreateIntArray(int size)
     srand(time(NULL));
     for (int i = 0; i < size; i++) 
     {
-        arr[i] = rand() % 10 + 1;
+        arr[i] = rand() % 10;
         std::cout << arr[i] << " ";
     }
     std::cout << " - Random Array" << std::endl;
@@ -305,6 +306,7 @@ void PrintSortedArrayWithNumber(int size, int b) //series 17
     {
         std::cout << *(arr+i) << " ";
     }
+    delete[] arr;
 }
 
 void PrintArrayWithUniqueNumber(int size) //series 18
@@ -320,6 +322,7 @@ void PrintArrayWithUniqueNumber(int size) //series 18
         std::cout << *(arr + i) << " ";
         uniqueNumber = *(arr + i);
     }
+    delete[] arr;
 }
 
 void PrintArrayWithNumbersLowerThanLeft(int size) //series 19
@@ -336,6 +339,7 @@ void PrintArrayWithNumbersLowerThanLeft(int size) //series 19
         }
     }
     std::cout << std::endl << count;
+    delete[] arr;
 }
 
 void PrintArrayWithNumbersLowerThanRight(int size) //series 20
@@ -352,6 +356,7 @@ void PrintArrayWithNumbersLowerThanRight(int size) //series 20
         }
     }
     std::cout << std::endl << count;
+    delete[] arr;
 }
 
 bool isArraySortedInAscendingOrder(int size) //series 21
@@ -360,9 +365,13 @@ bool isArraySortedInAscendingOrder(int size) //series 21
     for (int i = 0; i < size - 1; i++)
     {
         if (*(arr + i) > *(arr + i + 1))
+        {
+            delete[] arr;
             return false;
-        return true;
+        }
     }
+    delete[] arr;
+    return true;
 }
 
 void isArraySortedInDescendingOreder(int size) //series 22
@@ -378,6 +387,7 @@ void isArraySortedInDescendingOreder(int size) //series 22
         }
     }
     std::cout << index;
+    delete[] arr;
 }
 
 void isArraySawtoothed(int size) //series 23
@@ -397,7 +407,10 @@ void isArraySawtoothed(int size) //series 23
         }
         std::cout << index;
     }
+    delete[] arr;
 }
+
+
 
 void PrintSumBetweenLastZeros(int size) //series 24
 {
@@ -407,17 +420,16 @@ void PrintSumBetweenLastZeros(int size) //series 24
     int lastZeroIndex2 = -1;
     for (int i = 0; i < size; i++) 
     {
-        if (arr[i] == 0) 
+        if (*(arr + i) == 0)
         {
-            if (lastZeroIndex != -1 && i == size - 1) 
-            {
-                sum += std::accumulate(arr + lastZeroIndex + 1, arr + i, 0);
-            }
             lastZeroIndex2 = lastZeroIndex;
             lastZeroIndex = i;
         }
+
     }
+    sum += std::accumulate(arr + lastZeroIndex2, arr + lastZeroIndex, 0);
     std::cout << sum;
+    delete[] arr;
 }
 
 void PrintNumberBetweenFirstZeros(int size) //series 25
@@ -427,7 +439,7 @@ void PrintNumberBetweenFirstZeros(int size) //series 25
     int firstZeroIndex = -1;
     for (int i = 0; i < size; i++) 
     {
-        if (arr[i] == 0) 
+        if (*(arr + i) == 0)
         {
             if (firstZeroIndex == -1) 
             {
@@ -441,4 +453,68 @@ void PrintNumberBetweenFirstZeros(int size) //series 25
         }
     }
     std::cout << sum;
+    delete[] arr;
 }
+
+void PrintNumberInPower(int size, int k) //series 26
+{
+    double* arr = CreateDoubleArray(size);
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << pow(*(arr + i), k) << " ";
+    }
+    delete[] arr;
+}
+
+void PrintPowerOfNumbers(int size) //series 27
+{
+    double* arr = CreateDoubleArray(size);
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << pow(*(arr + i), i + 1) << " ";
+    }
+    delete[] arr;
+}
+
+void PrintPowerOfNumbersInReverseOrder(int size) //series 28
+{
+    double* arr = CreateDoubleArray(size);
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << pow(*(arr + i), size - i) << " ";
+    }
+    delete[] arr;
+}
+
+int SumOfArrays(int size, int k) //series 29
+{
+    int sum = 0;
+    for (int i = 0; i < k; i++)
+    {
+        int* arr = CreateIntArray(size);
+        for (int j = 0; j < size; j++)
+        {
+            sum += *(arr + j);
+        }
+        delete[] arr;
+    }
+    return sum;
+}
+
+void PrintSumOfEachArray(int size, int k) //series 30
+{
+    int sum = 0;
+    for (int i = 0; i < k; i++)
+    {
+        int* arr = CreateIntArray(size);
+        for (int j = 0; j < size; j++)
+        {
+            sum += *(arr + j);
+        }
+        std::cout << "Sum = " << sum << std::endl;;
+        sum = 0;
+        delete[] arr;
+        Sleep(1000);
+    }
+}
+

@@ -8,10 +8,11 @@ void for1(int k, int n)
 	}
 }
 
-void for2(int a, int b)
+template <class T>
+void PrintNumbersInAscendingOrder(T a, T b) // for 2
 {
 	int count = 0;
-	for (a; a <= b; a++)
+	for (; a <= b; a++) 
 	{
 		std::cout << a << std::endl;
 		count++;
@@ -19,100 +20,74 @@ void for2(int a, int b)
 	std::cout << count << std::endl;
 }
 
-void for3(int a, int b)
+template <class T>
+void PrintNumberInDescendingOrder(T a, T b) // for 3
 {
 	int count = 0;
 	b--;
-	for (; a < b; count++, b--)
+	for (; a < b; b--)
 	{
 		std::cout << b << std::endl;
+		count++;
 	}
 	std::cout << count << std::endl;
 }
 
-void for4(double price)
+template <typename T>
+void CalculatePrice(T price, T start, T end, T step) // for 4, 5, 6
 {
-	for (int kg = 1; kg <= 10; kg++)
+	for (T kg = start; kg <= end; kg += step)
 	{
 		std::cout << price * kg << std::endl;
 	}
 }
 
-void for5(double price)
+template <class T, class Operation>
+T CalculateSum(T a, T b, T init, Operation func) // for 7, 8, 9
 {
-	for (double kg = 0.1; kg <= 10; kg += 0.1)
-	{
-		std::cout << price * kg << std::endl;
-	}
-}
-
-void for6(double price)
-{
-	for (double kg = 1.0; kg <= 2; kg += 0.2)
-	{
-		std::cout << price * kg << std::endl;
-	}
-}
-
-int for7(int a, int b)
-{
-	int sum = 0;
+	T sum = init;
 	for (; a <= b; a++)
 	{
-		sum += a;
+		sum = func(sum, a);
 	}
 	return sum;
 }
 
-int for8(int a, int b)
+int for7 = CalculateSum(1, 10, 0, [](int a, int b) {return a + b;});
+
+int for8 = CalculateSum(1, 10, 1, [](int a, int b) {return a * b;});
+
+int for9 = CalculateSum(1, 10, 1, [](int a, int b) {return a + b * b;});
+
+template<class T, class Operation>
+T CalculateSumUsingFormula(int n, T init, T start, Operation func)
 {
-	int sum = 0;
-	for (; a <= b; a++)
+	T sum = init;
+	for (int i = start; i <= n; i++)
 	{
-		sum *= a;
+		sum += func(n, i);
 	}
 	return sum;
 }
 
-int for9(int a, int b)
+double for10 = CalculateSumUsingFormula(10, 0.0, 1.0, [](int a, int b) {return 1.0 / b;});
+
+int for11 = CalculateSumUsingFormula(10, 0, 0, [](int a, int b) {return (a + b) * (a + b);});
+
+template<class T>
+T CalculateProductWithStep(int n, T step)
 {
-	int sum = 0;
-	for (; a <= b; a++)
+	T product = 1 + step;
+	int multiplier = 2;
+	for (double i = product + step; multiplier <= n; multiplier++)
 	{
-		sum += a*a;
+		product *= i;
+		i += step;
 	}
-	return sum;
+	return product;
 }
 
-double for10(int n)
-{
-	double sum = 0;
-	for (int i = 1; i <= n;i++)
-	{
-		sum += 1.0 / i;
-	}
-	return sum;
-}
-
-double for11(int n)
-{
-	double sum = 0;
-	for (int i = 0; i <= n; i++)
-	{
-		sum += pow(n + i, 2);
-	}
-	return sum;
-}
-
-double for12(int n)
-{
-	double sum = 0;
-	for (double i = 1.0; i <= n; i++)
-	{
-		sum *= (i + 10) / 10;
-	}
-	return sum;
-}
+double for12 = CalculateProductWithStep(5, 0.1);
 
 double for13(int n)
 {
