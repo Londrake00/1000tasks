@@ -9,5 +9,5 @@
 
 int main()
 {
-	std::cout << for12;
+	FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return a + (h * i); });
 }

@@ -60,7 +60,7 @@ int for8 = CalculateSum(1, 10, 1, [](int a, int b) {return a * b;});
 
 int for9 = CalculateSum(1, 10, 1, [](int a, int b) {return a + b * b;});
 
-template<class T, class Operation>
+template<class T, class Operation> //for 10, 11
 T CalculateSumUsingFormula(int n, T init, T start, Operation func)
 {
 	T sum = init;
@@ -75,7 +75,7 @@ double for10 = CalculateSumUsingFormula(10, 0.0, 1.0, [](int a, int b) {return 1
 
 int for11 = CalculateSumUsingFormula(10, 0, 0, [](int a, int b) {return (a + b) * (a + b);});
 
-template<class T>
+template<class T> //for 12
 T CalculateProductWithStep(int n, T step)
 {
 	T product = 1 + step;
@@ -90,9 +90,10 @@ T CalculateProductWithStep(int n, T step)
 
 double for12 = CalculateProductWithStep(5, 0.1);
 
-double for13(int n)
+template <class T> //for 13
+double FindValeOfExpressionWithAlternation(T n)
 {
-	int count = 0;
+	T count = 0;
 	double sum = 0;
 	for (double i = 1.1; count <= n; count++, i += 0.1)
 	{
@@ -101,9 +102,12 @@ double for13(int n)
 	return sum;
 }
 
-int for14(int n)
+double for13 = FindValeOfExpressionWithAlternation(7);
+
+template<class T> //for 14
+T FindSquareOfNumberUsingFormula(T n)
 {
-	int sum = 0;
+	T sum = 0;
 	for (int i = 0; i <= n; i++)
 	{
 		sum += (2 * i) - 1;
@@ -111,9 +115,12 @@ int for14(int n)
 	return sum;
 }
 
-double for15(double a, int n)
+int for14 = FindSquareOfNumberUsingFormula(5);
+
+template<class T>//for 15
+int FindPowerOfNumber(T a, int n)
 {
-	double result = a;
+	T result = a;
 	for (int i = 0; i < n; i++)
 	{
 		result *= a;
@@ -121,33 +128,30 @@ double for15(double a, int n)
 	return result;
 }
 
-void for16(double a, int n)
+int for15 = FindPowerOfNumber(3.5, 5);
+
+template<class T> //for 16
+void PrintNaturalPowersOfNumber(T a, int n)
 {
-	for (int i = 1; i <= n;i++)
+	for (int i = 1; i <= n; i++)
 	{
 		std::cout << pow(a, i) << std::endl;
 	}
 }
 
-double for17(double a, int n)
+template<class T, class Operation> //for 17, 18
+T FindValueOfExpressionWithPower(T a, int n, Operation func)
 {
-	double sum = 0;
-	for (int i = 0; i <= n; i++)
-	{
-		sum += pow(a, i);
+	T result = func(a, 0);
+	for (int i = 1; i <= n; i++) {
+		result += func(a, i);
 	}
-	return sum;
+	return result;
 }
 
-double for18(double a, int n)
-{
-	double sum = 1;
-	for (int i = 0; i <= n; i++)
-	{
-		i % 2 == 0 ? sum -= pow(a, i) : sum += pow(a, i);
-	}
-	return sum;
-}
+double for17 = FindValueOfExpressionWithPower(3.5, 5, [](double a, int i) {return pow(a, i);});
+double for18 = FindValueOfExpressionWithPower(3.5, 5, [](double a, int i) {return (i % 2 == 0) ? -pow(a, i) : pow(a, i);});
+
 
 double fact(int num) //for 19
 {
@@ -156,112 +160,65 @@ double fact(int num) //for 19
 	return num * fact(num - 1);
 }
 
-double for20(int n)
+template<class T, class Operation> //for 20, 21
+T CalculateExpression(T n, Operation func)
 {
-	double sum = 0;
+	T result = 0.0;
 	for (int i = 1; i <= n; i++)
 	{
-		sum += fact(i);
-	}
-	return sum;
-}
-double for21(int n)
-{
-	double result = 1;
-	for (int i = 1; i <= n; i++)
-	{
-		result += 1 / fact(i);
+		result += func(i);
 	}
 	return result;
 }
 
-double for22(double x, int n)
+double for20 = CalculateExpression(5.0, [](int i) {return fact(i);});
+double for21 = CalculateExpression(5.0, [](int i) {return 1 / fact(i);});
+
+template<class T, class Operation> //for 22, 24-28
+T FindValueOfMathFunction(T x, int n, Operation func)
 {
-	double result = 0;
+	T result = 0;
 	for (int i = 0; i <= n; i++)
 	{
-		result += pow(x, i) / fact(i);
+		result += func(x,i);
 	}
 	return result;
 }
 
-double for23(double x, int n)
-{
-	double result = 0;
-	for (int i = 0; i <= n; i += 2)
-	{
-		i % 2 == 0 ? result -= std::pow(x, i) / fact(i) : result += std::pow(x, i) / fact(i);
-	}
-	return result;
-}
+double for22 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return pow(x, i) / fact(i);});
+double for24 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return pow(-1, i) * pow(x, 2 * i) / fact(2 * i);});
+double for25 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return pow(-1, i - 1) * pow(x, i) / i;});
+double for26 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return pow(-1, i) * pow(x, 2 * i + 1) / (2 * i + 1);});
+double for27 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return (2 * i - 1) * pow(x, 2 * i + 1) / (2 * i) * (2 * i + 1);});
+double for28 = FindValueOfMathFunction(3.5, 4, [](double x, int i) {return pow(-1, 4 - 1) * (2 * 4 - 3) * pow(x, 4) / 2 * 4;});
 
-double for24(double x, int n)
+template<class T, class Operation> //for 23
+T FindValueOfMathFunctionFor23(T x, int n, Operation func)
 {
-	double result = 0;
-	for (int i = 0;i <= n;++i)
-	{
-		result += pow(-1, i) * pow(x, 2 * i) / fact(2 * i);
-	}
-	return  result;
-}
-
-double for25(double x, int n)
-{
-	double result = 0;
-	for (int i = 1; i <= n; i++)
-	{
-		result += pow(-1, i - 1) * pow(x, i) / i;
-	}
-	return result;
-}
-
-double for26(double x, int n)
-{
-	double result = 0;
+	T result = 0;
 	for (int i = 0; i <= n; i++)
 	{
-		result += pow(-1, i) * pow(x, 2 * i + 1) / (2 * i + 1);
-	}
-	return result;
-}
-double for27(double x, int n)
-{
-	double result = 0;
-	for (int i = 1; i <= n; i++)
-	{
-		result += (2 * i - 1) * pow(x, 2 * i + 1) / (2 * i) * (2 * i + 1);
+		result = func(result, x, i);
 	}
 	return result;
 }
 
-double for28(double x, int n)
-{
-	double result = 0;
-	for (int i = 0; i <= n; i++)
-	{
-		result += pow(-1, n - 1) * (2 * n - 3) * pow(x, n) / 2 * n;
-	}return result;
-}
+double for23 = FindValueOfMathFunctionFor23(3.5, 4, [](double result, double x, int i) {return i % 2 == 0 ? result -= std::pow(x, i) / fact(i) : result += std::pow(x, i) / fact(i);});
 
-void for29(int n, double a, double b)
+template<class T, class Operation>
+void FindLengthOfSegment(int n, T a, T b, Operation func)
 {
 	double h = (b - a) / n;
 	std::cout << h << std::endl;
-	for (int i = 0; i <= h; i++)
+	for (int i = 0; i <= n; i++)
 	{
-		std::cout << a + (h * i) << std::endl;
+		std::cout << func(h, i, a) << std::endl;
 	}
 }
 
-void for30(int n, double a, double b)
-{
-	double h = (b - a) / n;
-	std::cout << h << std::endl;
-	for (int i = 0; i <= h; i++)
-	{
-		std::cout << sin(a + (h * i)) << std::endl;
-	}
-}
+//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return a + (h * i); }); // for29 (для корректной работы вызывайте функцию в main'е)
+//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return sin(a + (h * i)); }); // for30 (для корректной работы вызывайте функцию в main'е)
+
 
 void for31(int n)
 {
