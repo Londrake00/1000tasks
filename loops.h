@@ -216,99 +216,100 @@ void FindLengthOfSegment(int n, T a, T b, Operation func)
 	}
 }
 
-//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return a + (h * i); }); // for29 (для корректной работы вызывайте функцию в main'е)
-//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return sin(a + (h * i)); }); // for30 (для корректной работы вызывайте функцию в main'е)
+//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return a + (h * i); }); // for29 
+//FindLengthOfSegment(5, 1.3, 5.3, [](double h, int i, double a) { return sin(a + (h * i)); }); // for30 
 
-
-void for31(int n)
+template<class T, class Operation> //for 31, 32
+void PrintSequence(T n, T init, Operation func)
 {
-	double a = 2;
+	double a = init;
 	std::cout << a << std::endl;
 	for (int i = 1; i <= n; i++)
 	{
-		std::cout << 2 + (1 / a) << std::endl;
-		a = 2 + (1 / a);
+		std::cout << func(a, i) << std::endl;
+		a = func(a, i);
 	}
 }
 
-void for32(int n)
+//PrintSequence(5.0, 2.0, [](double a, int i) {return 2 + (1 / a);}); //for 31
+//PrintSequence(5.0, 1.0, [](double a, int i) {return (a + 1) / i;}); //for 32
+
+template <class T, class Operation> //for 33-35
+void Fibonacci(int n, T a1, T a2, T a3, int init, Operation func)
 {
-	double a = 1;
-	std::cout << a << std::endl;
-	for (int i = 1; i <= n; i++)
+	T ak = 0;
+	if (a3 != 0)
 	{
-		std::cout << (a + 1) / i;
-		a = (a + 1) / i;
+		std::cout << a1 << std::endl << a2 << std::endl << a3 << std::endl;
+		for (int i = init; i <= n; i++)
+		{
+			ak = func(a1, a2, a3);
+			a1 = a2;
+			a2 = a3;
+			a3 = ak;
+			std::cout << ak << std::endl;
+		}
 	}
+	else
+	{
+		std::cout << a1 << std::endl << a2 << std::endl;
+		for (int i = init; i <= n; i++)
+		{
+			ak = func(a1, a2, a3);
+			a1 = a2;
+			a2 = ak;
+			std::cout << ak << std::endl;
+		}
+	}
+	
+	
 }
 
-void for33(int n)
-{
-	int a1 = 1, a2 = 1, an = 0;
-	for (int i = 3; i <= n; i++)
-	{
-		an = a1 + a2;
-		a1 = a2;
-		a2 = an;
-		std::cout << an << std::endl;
-	}
-}
+//Fibonacci(5, 1, 1, 0, 3, [](int a1, int a2,) {return a1 + a2;}); //for 33
+//Fibonacci(5, 1.0, 2.0, 0.0, 3, [](double a1, double a2,) {return (a1 + 2 * a2) / 3;}); //for 34
+//Fibonacci(5, 1.0, 2.0, 3.0, 4, [](double a1, double a2, double a3) {return (a3 + a2 - 2 * a1) / 3;}); //for 35
 
-void for34(int n)
+template <class T> //for 36, 37
+T SumWithPower(int n, int k, int init)
 {
-	double a1 = 1, a2 = 2, ak = 0;
-	for (int i = 3; i <= n; i++)
+	T sum = 0;
+	if (k != 0)
 	{
-		ak = (a1 + 2 * a2)/3;
-		a1 = a2;
-		a2 = ak;
+		for (int i = 0; i <= n; i++)
+		{
+			sum += pow(i, k);
+		}
 	}
-}
-
-void for35(int n)
-{
-	double a1 = 1, a2 = 2, a3 = 3, ak = 0;
-	for (int i = 4; i <= n; i++)
+	else
 	{
-		ak = (a3 + a2 - 2 * a1) / 3;
-		a1 = a2;
-		a2 = a3;
-		a3 = ak;
-	}
-}
-
-double for36(int n, int k)
-{
-	double sum = 0;
-	for (int i = 0; i <= n; i++)
-	{
-		sum += pow(i, k);
+		for (int i = 1; i <= n; i++)
+		{
+			sum += pow(i, i);
+		}
 	}
 	return sum;
 }
 
-double for37(int n)
-{
-	double sum = 0;
-	for (int i = 1; i <= n; i++)
-	{
-		sum += pow(i, i);
-	}
-	return sum;
-}
+int for36 = SumWithPower<int>(7, 3, 0);
+int for37 = SumWithPower<int>(5, 0, 1);
 
-double for38(int n)
+template <class T> // for 38
+T SumWithDecreasingPower(int n)
 {
 	int power = n;
-	double sum = 0;
-	for (int i = 1; i <= n; i++, power--)
+	T sum = 0;
+	for (int i = 1; i <= n; i++)
 	{
 		sum += pow(i, power);
+		power--;
 	}
 	return sum;
 }
 
-void for39(int a, int b)
+int for38 = SumWithDecreasingPower<int>(5);
+
+template <class T> //for 39
+void PrintNumbersItslefTimes(T a, T b)
 {
 	for (a; a <= b; a++)
 	{
@@ -319,7 +320,10 @@ void for39(int a, int b)
 	}
 }
 
-void for40(int a, int b)
+//PrintNumberItselfTimes(1, 10); //for 39
+
+template<class T> //for 40
+void PrintNumberOneMoreTime(T a, T b)
 {
 	for (int i = 1; a <= b; i++, a++)
 	{
@@ -330,3 +334,5 @@ void for40(int a, int b)
 		std::cout << std::endl;
 	}
 }
+
+//PrintNumberOneMoreTime(1, 10); //for 40
