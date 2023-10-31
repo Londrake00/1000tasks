@@ -9,5 +9,5 @@
 
 int main()
 {
-	
+	std::cout << while7(100) << std::endl << while8(100);
 }
