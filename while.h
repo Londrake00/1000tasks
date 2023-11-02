@@ -138,7 +138,7 @@ std::pair<T, T> SumLowerNumber(T n, bool isWhileFourteen)
 	}
 	else
 	{
-		while (sum <= a) 
+		while (sum <= k) 
 		{
 			sum += 1.0 / k;
 			k++;
@@ -205,7 +205,7 @@ bool CheckDigit(T n, Operation condition)
 	while (n > 0)
 	{
 		if (condition(n))
-			retrun true;
+			return true;
 		n /= 10;
 	}
 	return false;
@@ -300,7 +300,7 @@ void SequnenceWithCondition(T e)
 		ak = 2 + 1.0 / a1;
 		k++;
 	}
-	std::cout << "k = " << k << ", A(k-1)=" << a2 << ", A(k)=" << ak;
+	std::cout << "k = " << k << ", A(k-1)=" << a1 << ", A(k)=" << ak;
 }
 
 template <class T> //while 29

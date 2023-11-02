@@ -9,7 +9,7 @@ int* CreateIntArray(int size)
     srand(time(NULL));
     for (int i = 0; i < size; i++) 
     {
-        arr[i] = rand() % 10;
+        arr[i] = rand() % 9 + 1;
         std::cout << arr[i] << " ";
     }
     std::cout << " - Random Array" << std::endl;
@@ -20,11 +20,9 @@ double* CreateDoubleArray(int size)
 {
     double* arr = new double[size];
     srand(time(NULL));
-    double decimalPart = 0;
     for (int i = 0; i < size; i++)
     {
-        decimalPart = (rand() % 10) / 10.0;
-        arr[i] = static_cast<double>(rand() % 10 + 1) + decimalPart;
+        arr[i] = (rand() % 99 + 1) / 10.0;
         std::cout << arr[i] << " ";
     }
     std::cout << " - Random Array" << std::endl;
@@ -48,41 +46,29 @@ void BubbleSort(int *arr, int size)
     std::cout << std::endl;
 }
 
-void series1(int size)
+template<class Operation>
+void CalculateElementsOfArray(int size, int init, Operation func, bool calculateAverage = false)
 {
     int* arr = CreateIntArray(size);
-    int sum = 0;
-    for (int i = 0; i < size;i++)
+    int result = init;
+    for (int i = 0; i < size; i++)
     {
-        sum += arr[i];
+        result = func(result, arr[i]);
     }
-    std::cout << sum;
+    if (calculateAverage)
+    {
+        std::cout << (double)result / size;
+    }
+    else
+    {
+        std::cout << result;
+    }
     delete[] arr;
 }
 
-void series2(int size)
-{
-    int* arr = CreateIntArray(size);
-    int sum = 0;
-    for (int i = 0; i < size;i++)
-    {
-        sum *= arr[i];
-    }
-    std::cout << sum;
-    delete[] arr;
-}
-
-void series3(int size)
-{
-    int* arr = CreateIntArray(size);
-    int sum = 0;
-    for (int i = 0; i < size;i++)
-    {
-        sum += arr[i];
-    }
-    std::cout << (double)sum / size;
-    delete[] arr;
-}
+//CalculateElementsOfArray(10, 0 [](int a, int b) { return a + b; }); //series 1
+//CalculateElementsOfArray(10, 1 [](int a, int b) { return a * b; }); //series 2
+//CalculateElementsOfArray(10, 0 [](int a, int b) { return a + b; }, true); //series 3
 
 void series4(int size)
 {

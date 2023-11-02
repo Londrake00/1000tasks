@@ -9,5 +9,7 @@
 
 int main()
 {
-	std::cout << while7(100) << std::endl << while8(100);
+	CalculateElementsOfArray(10, 1, [](int a, int b) { return a * b; });
+	std::cout << std::endl;
+	CalculateElementsOfArray(10, 0, [](int a, int b) { return a + b; }, true);
 }
